@@ -14,15 +14,16 @@ This project wouldn't be possible without these excellent open source projects:
 * Django - Python web framework, which is a base for DoTS
 * OpenBabel/pybel - chemistry toolkit with python bindings
 * jQuery - javascript library
-* AutoDock - suite of automated docking tools
+* AutoDock Vina- suite of automated docking tools
 * ChemDoodle Web - javascript chemical library, which handles the displayand drawing of chemical structures
 * Flot - jQuery plugin for plotting
-* Foundation - CSS style
+* Twitter Bootstrap - CSS style
 * Font Awesome
 
 
 ## What does not work
-
+* Async docking
+* Can crash if can't dock a compound in one of receptors
 
 ## Credits
 
