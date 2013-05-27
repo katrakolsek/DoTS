@@ -1,9 +1,9 @@
 DoTS
 ============
 
-Django based chemical database/inventory
+Docking interface for Target Systems
 
-![Editor Screenshot](https://raw.github.com/samoturk/DoTS/master/screenshot_search.png)
+![Editor Screenshot](https://raw.github.com/katrakolsek/DoTS/master/screen_shot.png)
 
 ## About
 

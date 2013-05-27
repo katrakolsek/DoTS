@@ -1,0 +1,11 @@
+receptor = 1P8D.pdbqt
+center_x = 37.8
+center_y = -0.86
+center_z = 13.25
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+

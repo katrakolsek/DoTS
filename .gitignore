@@ -1,0 +1,8 @@
+*.pyc
+*.xls
+*.xlsm
+*.xlsx
+*.csv
+*~
+*.bak
+*.BAK

@@ -1,0 +1,12 @@
+receptor = 3VHV.pdbqt
+
+center_x = 21.3
+center_y = 46.5
+center_z = 18.7
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+

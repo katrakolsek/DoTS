@@ -1,0 +1,11 @@
+receptor = 3IMY.pdbqt
+center_x = 4
+center_y = 21.5
+center_z = 27
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+

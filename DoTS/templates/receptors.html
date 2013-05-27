@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    
+<div class="span10">
+<br>
+<div>
+<h2> Statistics for receptors </h2>
+</div>
+<br>
+
+{% for receptor in allreceptors %}
+<section id="{{receptor.id}}">
+<h3><a href="/receptor/{{receptor.id}}">{{receptor.name}} ({{receptor.abbreviation}})</a></h3>
+<p>{{receptor.description}}</p>
+<p><em>Files: </em>{{receptor.pdbqt}}, {{receptor.conf}}, {{receptor.pdbqt_an}}, {{receptor.conf_an}}</p>
+</section>
+<hr>
+{% endfor%}  
+</div>
+
+</div>
+
+</div>
+{% endblock %}
+

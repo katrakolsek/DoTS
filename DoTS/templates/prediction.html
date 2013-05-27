@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if error %}
+{% for er in error %}
+<div class="alert">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+<strong>{{er}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="form">
+<form action="" method="post">
+{% csrf_token %}
+  <fieldset>
+    <legend>Submit molecule</legend>
+    <label>Input SMILES:</label>
+    {{form.smiles}}
+    {{form.name}}
+    <span class="help-block">Please input valid SMILES of your molecule, name is optional.</span>
+    <button type="submit" class="btn" type="submit" name="submitdocking">Submit</button>
+  </fieldset>
+</form>
+
+</div>
+
+
+{% endblock %}

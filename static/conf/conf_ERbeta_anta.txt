@@ -1,0 +1,13 @@
+receptor = 1QKN.pdbqt
+
+center_x = 20.95
+center_y = 26.5
+center_z = 9.168
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+
+cpu = 8

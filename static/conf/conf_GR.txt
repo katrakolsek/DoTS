@@ -1,0 +1,13 @@
+receptor = 3BQD.pdbqt
+
+center_x = 38.7
+center_y = 30.4
+center_z = 9.4
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+
+

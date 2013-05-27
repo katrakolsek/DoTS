@@ -1,0 +1,13 @@
+receptor = 3OLS.pdbqt
+
+center_x = 23.5
+center_y = -26
+center_z = -11
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+
+cpu = 8

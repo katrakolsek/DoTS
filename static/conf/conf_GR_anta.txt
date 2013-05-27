@@ -1,0 +1,12 @@
+receptor = 3N52_chC.pdbqt
+
+center_x = -45
+center_y = 12
+center_z = -40.3
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+

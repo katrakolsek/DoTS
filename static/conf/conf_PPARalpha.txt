@@ -1,0 +1,13 @@
+receptor = 3KDU.pdbqt
+
+center_x = 10
+center_y = 6.5
+center_z = -7.5
+
+size_x = 22
+size_y = 22
+size_z = 22
+
+exhaustiveness = 8
+
+cpu = 8

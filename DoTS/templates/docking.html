@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/js/ChemDoodleWeb.css" />
+<script type="text/javascript" src="/static/js/ChemDoodleWeb-libs.js"></script>
+<script type="text/javascript" src="/static/js/ChemDoodleWeb.js"></script>
+
+<div>
+<h2>Docking prediction "{{docking.uniquestring}}"</h2>
+</div>
+
+<div class="prop">
+<script>
+    var viewACS = new ChemDoodle.ViewerCanvas('viewACS', 200, 200);
+    viewACS.specs.bonds_width_2D = 1.2;
+    viewACS.specs.bonds_saturationWidth_2D = .36;
+    viewACS.specs.bonds_hashSpacing_2D = 5;
+    viewACS.specs.atoms_font_size_2D = 12;
+    viewACS.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
+    viewACS.specs.atoms_displayTerminalCarbonLabels_2D = true;
+    var MolFile = '{{docking.molfile}}';
+    var Mol = ChemDoodle.readMOL(MolFile);
+    Mol.scaleToAverageBondLength(18);
+    viewACS.loadMolecule(Mol);
+</script>
+<p><strong>SMILES: </strong>{{docking.smiles}}</p>
+<p><strong>Name: </strong>{{docking.molname}}</p>
+</div>
+<div>
+<h2>Properties</h2>
+<div>
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th><abbr title="Molecular weight">MW</abbr></th>
+    <th><abbr title="Hydrogen bond acceptors">HBA</abbr></th>
+    <th><abbr title="Hydrogen bond donors">HBD</abbr></th>
+    <th><abbr title="Logarithm of partition coefficient">LogP</abbr></th>
+    <th><abbr title="Topological polar surface area">TPSA</abbr></th>
+    <th><abbr title="Rotatable bonds">Rot.</abbr></th>
+    <th><abbr title="Pan Assay Interferance Compounds">PAINS</abbr></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>{{docking.CMW|floatformat:2}}</td>
+    <td>{{docking.HBA}}</td>
+    <td>{{docking.HBD}}</td>
+    <td>{{docking.logP|floatformat:2}}</td>
+    <td>{{docking.tpsa}}</td>
+    <td>{{docking.nrb}}</td>
+    <td>{{docking.pains}}</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+<div class="prediction">
+<h2>Predictions</h2>
+{{docking.status}}
+<!--{{docking.results}}-->
+</div>
+<div class="span4">
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <th class="span2">Receptor/form</th>
+    <th class="span2">Score</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for score in scores %}
+    <tr>
+    <td>{{score|safe}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

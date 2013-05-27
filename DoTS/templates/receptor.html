@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+<h2>{{receptor.name}}</h2>
+<h3>{{receptor.abbreviation}}</h3>
+</div>
+
+<div class="description">
+<p>{{receptor.description}}</p>
+</div>
+
+<div class="performance">
+<h2>Performance</h2>
+{% if rocdata_an != None or receptor.abbreviation == "PR"%}
+<h3>Agonist</h3>
+{% endif %}
+{% if rocdata_an == None and receptor.abbreviation != "PR" %}
+<h3>Active</h3>
+{% endif %}
+
+<div id="agonist" style="width:500px;height:500px"></div>
+<script type="text/javascript">
+$(function () {
+    var d1 = {{rocdata}};
+    var d3 = [[0,0],[1,1]];
+    $.plot($("#agonist"), [
+        {
+        data:d3,
+        lines: { show: true},
+        color: "#7f8c8d",
+        },
+        {
+        data: d1,
+        label: "AUC = {{auc}} EF1% = {{enric}}",
+        lines: { show: true, fill: true },
+        color: "#7f8c8d",
+        shadowSize: 10,
+       }],
+       {yaxis: {ticks: 5, min: 0, max: 1, axisLabel: 'Selectivity',  axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 14, axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+            axisLabelPadding: 5},
+        xaxis: {ticks: 5, min: 0, max: 1, axisLabel: '1-Specificity',  axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 14, axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+            axisLabelPadding: 5},
+        legend: {show: true, position: "se"}
+       });
+});
+</script>
+
+{% ifnotequal rocdata_an None %}
+<h3>Antagonist</h3>
+<div id="antagonist" style="width:500px;height:500px"></div>
+<script type="text/javascript">
+$(function () {
+    var d2 = {{rocdata_an}};
+    var d4 = [[0,0],[1,1]];
+    $.plot($("#antagonist"), [
+        {
+        data:d4,
+        lines: { show: true},
+        color: "#556B2F",
+        },
+        {
+        data: d2,
+        label: "AUC = {{auc_an}} EF1% = {{enric_an}}",
+        lines: { show: true, fill: true },
+        color: "#556B2F",
+        shadowSize: 10,
+       }],
+       {yaxis: {ticks: 5, min: 0, max: 1, axisLabel: 'Selectivity',  axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 14, axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+            axisLabelPadding: 5},
+        xaxis: {ticks: 5, min: 0, max: 1, axisLabel: '1-Specificity',  axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 14, axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+            axisLabelPadding: 5},
+        legend: {show: true, position: "se"}
+       });
+});
+
+</script>
+{% endifnotequal %}
+</div>
+
+<div class="files">
+<p><em>Files: </em>{{receptor.pdbqt}}, {{receptor.conf}}, {{receptor.pdbqt_an}}, {{receptor.conf_an}}</p>
+<div>
+{% endblock %}
