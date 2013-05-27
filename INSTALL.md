@@ -7,6 +7,8 @@ It was tested on current version of Arch Linux
 * Django 1.4.x or 1.5.x
 * OpenBabel 2.3.x with Python bindings (OpenBabel also needs cairo library)
 * Numpy 1.7.x
+* Autodock-vina 1.1.x
+* Will need celery 3.0 for async process (not implemented yet)
 * Any database supported by Django (with python bindings)
 * Any web server that can run Django (with wsgi support)
 
