@@ -3,7 +3,7 @@ DoTS
 
 Docking interface for Target Systems
 
-![Editor Screenshot](https://raw.github.com/katrakolsek/DoTS/master/screen_shot.png)
+![Editor Screenshot](https://raw.github.com/katrakolsek/DoTS/master/DoTS_result.png)
 
 ## About
 

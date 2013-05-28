@@ -1,3 +1,10 @@
 canvas.ChemDoodleWebComponent {
-	border: 1px solid black;
+    border: 0px solid black;
+    
+    text-align: center;
+    -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+            border-radius: 3px;
+    min-height: 40px;
+    line-height: 40px;
 }

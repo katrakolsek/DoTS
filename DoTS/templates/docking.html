@@ -4,20 +4,51 @@
 <link rel="stylesheet" type="text/css" href="/static/js/ChemDoodleWeb.css" />
 <script type="text/javascript" src="/static/js/ChemDoodleWeb-libs.js"></script>
 <script type="text/javascript" src="/static/js/ChemDoodleWeb.js"></script>
-
+<style>
+.show-grid {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.show-grid [class*="span"] {
+  background-color: #eee;
+  text-align: center;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  min-height: 40px;
+  line-height: 40px;
+}
+.show-grid [class*="span"]:hover {
+  background-color: #ddd;
+}
+.show-grid .show-grid {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.show-grid .show-grid [class*="span"] {
+  margin-top: 5px;
+}
+.show-grid [class*="span"] [class*="span"] {
+  background-color: #ccc;
+}
+.show-grid [class*="span"] [class*="span"] [class*="span"] {
+  background-color: #999;
+}
+</style>
 <div>
 <h2>Docking prediction "{{docking.uniquestring}}"</h2>
 </div>
 
 <div class="prop">
 <script>
-    var viewACS = new ChemDoodle.ViewerCanvas('viewACS', 200, 200);
+    var viewACS = new ChemDoodle.ViewerCanvas('viewACS', 455, 180);
     viewACS.specs.bonds_width_2D = 1.2;
     viewACS.specs.bonds_saturationWidth_2D = .36;
     viewACS.specs.bonds_hashSpacing_2D = 5;
     viewACS.specs.atoms_font_size_2D = 12;
     viewACS.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
     viewACS.specs.atoms_displayTerminalCarbonLabels_2D = true;
+    viewACS.specs.backgroundColor = '#bdc3c7';
     var MolFile = '{{docking.molfile}}';
     var Mol = ChemDoodle.readMOL(MolFile);
     Mol.scaleToAverageBondLength(18);
@@ -28,55 +59,52 @@
 </div>
 <div>
 <h2>Properties</h2>
-<div>
-<table class="table table-striped">
-<thead>
-    <tr>
-    <th><abbr title="Molecular weight">MW</abbr></th>
-    <th><abbr title="Hydrogen bond acceptors">HBA</abbr></th>
-    <th><abbr title="Hydrogen bond donors">HBD</abbr></th>
-    <th><abbr title="Logarithm of partition coefficient">LogP</abbr></th>
-    <th><abbr title="Topological polar surface area">TPSA</abbr></th>
-    <th><abbr title="Rotatable bonds">Rot.</abbr></th>
-    <th><abbr title="Pan Assay Interferance Compounds">PAINS</abbr></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>{{docking.CMW|floatformat:2}}</td>
-    <td>{{docking.HBA}}</td>
-    <td>{{docking.HBD}}</td>
-    <td>{{docking.logP|floatformat:2}}</td>
-    <td>{{docking.tpsa}}</td>
-    <td>{{docking.nrb}}</td>
-    <td>{{docking.pains}}</td>
-    </tr>
-    </tbody>
-</table>
+<div class="bs-docs-grid">
+<div class="row show-grid">
+    <div class="span1" style="background:#bdc3c7"><abbr title="Molecular weight">MW</abbr></div>
+    <div class="span1" style="background:#bdc3c7"><abbr title="Hydrogen bond acceptors">HBA</abbr></div>
+    <div class="span1" style="background:#bdc3c7"><abbr title="Hydrogen bond donors">HBD</abbr></div>
+    <div class="span1" style="background:#bdc3c7"><abbr title="Logarithm of partition coefficient">LogP</abbr></div>
+    <div class="span1" style="background:#bdc3c7"><abbr title="Topological polar surface area">TPSA</abbr></div>
+    <div class="span1" style="background:#bdc3c7"><abbr title="Rotatable bonds">Rot.</abbr></div>
+</div>
+
+<div class="row show-grid">
+    <div class="span1" style="background:#ecf0f1">{{docking.CMW|floatformat:2}}</div>
+    <div class="span1" style="background:#ecf0f1">{{docking.HBA}}</div>
+    <div class="span1" style="background:#ecf0f1">{{docking.HBD}}</div>
+    <div class="span1" style="background:#ecf0f1">{{docking.logP|floatformat:2}}</div>
+    <div class="span1" style="background:#ecf0f1">{{docking.tpsa}}</div>
+    <div class="span1" style="background:#ecf0f1">{{docking.nrb}}</div>
+</div>
+
+<div class="row show-grid">
+    <div class="span6" style="background:#bdc3c7"><abbr title="Pan Assay Interferance Compounds">PAINS: {{docking.pains}}</abbr></div>
+</div>
+
 </div>
 </div>
 
+
 <div class="prediction">
 <h2>Predictions</h2>
+{% if docking.status != "Finished!" %}
 {{docking.status}}
+{% endif %}
 <!--{{docking.results}}-->
 </div>
-<div class="span4">
-<table class="table table-striped">
-    <thead>
-    <tr>
-    <th class="span2">Receptor/form</th>
-    <th class="span2">Score</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for score in scores %}
-    <tr>
-    <td>{{score|safe}}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div>
+{{scores|safe}}
+<h5>Legend</h5>
+<p>Probability of binding: </p>
+<div class="bs-docs-grid">
+            <div class="row show-grid">
+              <div class="span2" style="background:#e74c3c">High probability</div>
+              <div class="span1" style="background:#e67e22"></div>
+              <div class="span1" style="background:#f1c40f"></div>
+              <div class="span2" style="background:#2ecc71">Low probability</div>
+            </div>
+</div>
 </div>
 
 {% endblock %}

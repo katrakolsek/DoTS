@@ -3,7 +3,7 @@
 
 <div>
 <h2>{{receptor.name}}</h2>
-<h3>{{receptor.abbreviation}}</h3>
+<h5>Abbreviation: {{receptor.abbreviation}}</h5>
 </div>
 
 <div class="description">
@@ -11,7 +11,8 @@
 </div>
 
 <div class="performance">
-<h2>Performance</h2>
+<h3>Performance</h3>
+<p>This is an overview of the performance of our protocols on different forms of {{receptor.name|lower}}</p>
 {% if rocdata_an != None or receptor.abbreviation == "PR"%}
 <h3>Agonist</h3>
 {% endif %}
@@ -19,7 +20,7 @@
 <h3>Active</h3>
 {% endif %}
 
-<div id="agonist" style="width:500px;height:500px"></div>
+<div id="agonist" style="width:350px;height:350px"></div>
 <script type="text/javascript">
 $(function () {
     var d1 = {{rocdata}};
@@ -47,10 +48,21 @@ $(function () {
        });
 });
 </script>
+<h5>Tresholds</h5>
+<div class="row">
+<div class="span8">
+{{tresholds|safe}}
+<blockquote>
+<p><small>More negative score means greater possibility for binding.</small></p>
+<p><small>Selectivity represents fraction of true positives identified above certain score.</small></p>
+<p><small>Specificity represents fraction of true negatives eliminated above certain score.</small></p>
+</blockquote>
+</div>
+</div>
 
 {% ifnotequal rocdata_an None %}
 <h3>Antagonist</h3>
-<div id="antagonist" style="width:500px;height:500px"></div>
+<div id="antagonist" style="width:350px;height:350px"></div>
 <script type="text/javascript">
 $(function () {
     var d2 = {{rocdata_an}};
@@ -79,10 +91,22 @@ $(function () {
 });
 
 </script>
+<h5>Tresholds</h5>
+<p>More negative score means greater possibility for binding.</p>
+<div class="row">
+<div class="span8">
+{{tresholds_an|safe}}
+<blockquote>
+<p><small>More negative score means greater possibility for binding.</small></p>
+<p><small>Selectivity represents fraction of true positives identified above certain score.</small></p>
+<p><small>Specificity represents fraction of true negatives eliminated above certain score.</small></p>
+</blockquote>
+</div>
+</div>
 {% endifnotequal %}
 </div>
 
 <div class="files">
-<p><em>Files: </em>{{receptor.pdbqt}}, {{receptor.conf}}, {{receptor.pdbqt_an}}, {{receptor.conf_an}}</p>
+<p><em>Files: </em> <a href="/static/receptor/{{receptor.pdbqt}}.pdbqt">{{receptor.pdbqt}}</a>, <a href="/static/conf/{{receptor.conf}}.txt">{{receptor.conf}}</a>, <a href="/static/receptor/{{receptor.pdbqt_an}}.pdbqt">{{receptor.pdbqt_an}}</a>, <a href="/static/conf/{{receptor.conf_an}}.txt">{{receptor.conf_an}}</a></p>
 <div>
 {% endblock %}

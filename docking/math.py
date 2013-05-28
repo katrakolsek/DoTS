@@ -75,3 +75,96 @@ def getEnrichment(data, procent):
                 positive_oneprocent += 1
     enrichfactor = round(positive_oneprocent / float(oneprocent_molecules) * all_molecules / float(positive_all), 1)
     return enrichfactor
+
+def tresholdstable(treshold):
+    tlist = treshold.split(';')
+    c = 1
+    treshold = '''<table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Score</th>
+        <th>Selectivity</th>
+        <th>Specificity</th>
+        <th><abbr title="Positive predictive value">PPV</abbr></th>
+        <th><abbr title="Negative predictive value">NPV</abbr></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        '''
+    for t in tlist:
+        if c == 1:
+            color = "red"
+        elif c == 2:
+            color = "orange"
+        elif c == 3:
+            color = "yellow"
+        slist = t.split(" ")
+        for s in slist:
+            treshold += '<td>%s</td>' % s
+        if c != 3:
+            treshold += '''
+            </tr>
+            <tr>
+            '''
+        else:
+            treshold += '''
+            </tr>
+            '''
+        c += 1
+    treshold += '''
+    </tr>
+    </tbody>
+    </table>
+    '''
+    return treshold
+
+def resultstable(receptors,results):
+    scores = '''
+    <div class="bs-docs-grid">
+    <div class="row show-grid">
+    '''
+    c = 0
+    for rec in receptors:
+        if c%3 == 0:
+            scores += '''
+            </div>
+            <div class="row show-grid">
+            '''
+        treshold1 = float(rec.treshold1.split(';')[0].split(' ')[0])
+        treshold2 = float(rec.treshold1.split(';')[1].split(' ')[0])
+        treshold3 = float(rec.treshold1.split(';')[2].split(' ')[0])
+        for result in results:
+            if rec.pdbqt in result:
+                score = float(result.split(":")[1])
+                if score < treshold1:
+                    color = "#e74c3c" #red
+                elif score >= treshold1 and score < treshold2:
+                    color = "#e67e22" #orange
+                elif score >= treshold2 and score < treshold3:
+                    color = "#f1c40f" #yellow
+                else:
+                    color = "#2ecc71" #green
+                scores += '<div class="span2" style="background:' + color + '"><strong>' + rec.abbreviation + ": " + result.split(":")[1] + '</strong></div>'
+        c += 1
+        if rec.pdbqt_an and rec.conf_an:
+            if c%3 == 0:
+                scores += '''
+                </div>
+                <div class="row show-grid">
+                '''
+            for result in results:
+                if rec.pdbqt_an in result:
+                    score = float(result.split(":")[1])
+                    if score < treshold1:
+                        color = "#e74c3c" #red
+                    elif score >= treshold1 and score < treshold2:
+                        color = "#e67e22" #orange
+                    elif score >= treshold2 and score < treshold3:
+                        color = "#f1c40f" #yellow
+                    else:
+                        color = "#2ecc71" #green
+                    scores += '<div class="span2" style="background:' + color + '"><strong>' + rec.abbreviation+" an.:  "+result.split(":")[1] + '</strong></div>'
+            c += 1
+    scores += '</div></div>'
+    return scores
