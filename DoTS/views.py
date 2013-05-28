@@ -3,7 +3,7 @@ from news.models import News
 from docking.models import Receptor, Docking
 from docking.adddocking import adddocking
 from docking.forms import SubmitDocking
-from docking.math import getroc, getEnrichment, AUC
+from docking.math import getroc, getEnrichment, AUC, tresholdstable, resultstable
 from json import dumps
 import pybel
 import string
@@ -57,16 +57,19 @@ def receptor(request, idnum):
     rocdata = dumps(zip(xdata, ydata)) #makes nested list in JSON format to plot ROC with Flot
     auc = round(AUC(xdata, ydata), 4) #takes Se data and 1-Sp data and returns auc of ROC
     enric = getEnrichment(rec.roc.split('\\n')[:-1], 1) #calculates enrichment factor, where sec arg is procent number
+    tresholds = tresholdstable(rec.treshold1)
     if rec.roc_an != "":
         xdata_an, ydata_an = getroc(rec.roc_an.split('\\n')[:-1]) #returns Se data and 1-Sp data
         rocdata_an = dumps(zip(xdata_an, ydata_an)) #makes nested list in JSON format to plot ROC with Flot
         auc_an = round(AUC(xdata_an, ydata_an), 4) #takes Se data and 1-Sp data and returns auc of ROC
         enric_an = getEnrichment(rec.roc_an.split('\\n')[:-1], 1) #calculates enrichment factor, where sec arg is procent number
+        tresholds_an = tresholdstable(rec.treshold1_an)
     else:
         rocdata_an = None
         auc_an = None
         enric_an = None
-    return render(request, 'receptor.html', {'receptor':rec, 'rocdata':rocdata, 'enric':enric, 'auc':auc, 'rocdata_an':rocdata_an, 'enric_an':enric_an, 'auc_an':auc_an, 'allreceptors':allreceptors})
+        tresholds_an = None
+    return render(request, 'receptor.html', {'receptor':rec, 'rocdata':rocdata, 'enric':enric, 'auc':auc, 'rocdata_an':rocdata_an, 'enric_an':enric_an, 'auc_an':auc_an, 'allreceptors':allreceptors, 'tresholds':tresholds, 'tresholds_an':tresholds_an})
 
 def docking(request, idnum):
     allreceptors = Receptor.objects.all()
@@ -78,15 +81,7 @@ def docking(request, idnum):
     dock = get_object_or_404(Docking, pk=idnum)
     results = dock.results.split(",")
     receptors = Receptor.objects.all()
-    scores = []
-    for rec in receptors:
-        for result in results:
-            if rec.pdbqt in result:
-                scores.append(rec.abbreviation+": </td><td>"+result.split(":")[1])
-        if rec.pdbqt_an and rec.conf_an:
-            for result in results:
-                if rec.pdbqt_an in result:
-                    scores.append(rec.abbreviation+" an.: </td><td>"+result.split(":")[1])
+    scores = resultstable(receptors,results)
     return render(request, 'docking.html', {'docking':dock, 'scores':scores, 'allreceptors':allreceptors})
 
 def about(request):
