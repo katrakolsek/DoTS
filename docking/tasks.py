@@ -1,27 +1,10 @@
-#from celery.decorators import task
+from celery.decorators import task
 import pybel
 from subprocess import call
 from os import listdir, makedirs
 from django.conf import settings
 from docking.models import Receptor
 
-"""
-This module needs celery and compatible messaging queue system (RabbitMQ)
-"""
-"""
-@task(max_retries=2, default_retry_delay=5*60)
-def dockingtask(receptors,smiles,uniquestring):
-
-    smiles = docking.smiles
-    mol = pybel.readstring('smi', smiles)
-    mol.make3D(forcefield="MMFF94", steps=10)
-    mol.localopt(forcefield="MMFF94", steps=500)
-    mol.write("pdbqt", uniquestring+".pdbqt", overwrite=True) # assign location!
-    
-    for receptor in receptors:
-        #  vina --receptor 2R6W.pdbqt --ligand CHEMBL2071175.pdbqt --config conf_ERalpha.txt --out ligand_ERalpha.pdbqt --log ligand_ERalpha.log
-        call(["vina", "--config", conf, "--receptor", rec, "--ligand", uniquestring+receptor".pdbqt", ">>", uniquestring+".log"])"""
-        
 def datacleaning(datafile):
     """
     converts vina report to csv
@@ -47,7 +30,11 @@ def datacleaning(datafile):
     print lines [0][0]
     return lines [0][0]
 
+@task(max_retries=2, default_retry_delay=5*60)
 def dockingseq(dock):
+    """
+    This module needs celery and compatible messaging queue system (RabbitMQ)
+    """
     static = settings.STATICFILES_DIRS[0]
     respath = static+"results/"+dock.uniquestring
     makedirs(respath)

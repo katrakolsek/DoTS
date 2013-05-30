@@ -36,7 +36,7 @@ def adddocking(uniquestring,smiles,molname):
                     CMW=CMW,HBA=HBA,HBD=HBD,logP=logP,tpsa=tpsa,nrb=nrb,pains=pains,
                     status=status,results=results)
         dock.save()
-        dockingseq(dock)
+        dockingseq.delay(dock)
         return dock.id
     except:
         status = "Something went wrong.."
