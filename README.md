@@ -15,6 +15,8 @@ This project wouldn't be possible without these excellent open source projects:
 * OpenBabel/pybel - chemistry toolkit with python bindings
 * jQuery - javascript library
 * AutoDock Vina- suite of automated docking tools
+* Celery and django-celery for async tasks (docking in background)
+* RabbitMQ - messaging system
 * ChemDoodle Web - javascript chemical library, which handles the displayand drawing of chemical structures
 * Flot - jQuery plugin for plotting
 * Twitter Bootstrap - CSS style
@@ -22,7 +24,6 @@ This project wouldn't be possible without these excellent open source projects:
 
 
 ## What does not work
-* Async docking
 * Can crash if can't dock a compound in one of receptors
 
 ## Credits
