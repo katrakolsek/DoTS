@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Django based docking interface for target systems">
     <meta name="author" content="Katra Kolšek and Samo Turk">
-
+    {% if docking.status != "Finished!" %}
+    <meta http-equiv="refresh" content="30">
+    {% endif %}
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/static/bootswatch-spruce.css" />
     <link rel="stylesheet" type="text/css" href="/static/fontawesome.css" />
@@ -60,8 +62,9 @@
   <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
   <div class="container">
+  <!--<a class="brand" href="./"> Home</a>-->
     <ul class="nav">
-      <li><a href="/index.html"><i class="icon-home"></i> Home</a></li>
+      <li><a href="/"><i class="icon-home"></i> Home</a></li>
       <li><a href="/prediction.html"><i class="icon-medkit"></i> Prediction</a></li>
       <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="/receptors.html"><i class="icon-screenshot"></i> Targets</a>
