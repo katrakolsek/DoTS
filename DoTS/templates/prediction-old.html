@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if error %}
+{% for er in error %}
+<div class="alert">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+<strong>{{er}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<link rel="stylesheet" type="text/css" href="/static/js/ChemDoodleWeb.css" />
+<link rel="stylesheet" href="/static/js/jquery-ui-1.9.2.custom.css" type="text/css">
+
+<script type="text/javascript" src="/static/js/ChemDoodleWeb-libs.js"></script>
+<script type="text/javascript" src="/static/js/ChemDoodleWeb.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="/static/js/ChemDoodleWeb-sketcher.js"></script>
+
+<div class="form">
+<form action="" method="post">
+{% csrf_token %}
+    <h2>Submit molecule</h2>
+    <fieldset>
+    
+    <label>Draw molecule:</label>
+    <div name="sketcher">
+    <div>
+    <script type="text/javascript" style="text-align:left;margin:auto;">
+    ChemDoodle.ELEMENT['H'].jmolColor = 'black';
+    ChemDoodle.ELEMENT['S'].jmolColor = '#B9A130';
+    var sketcher = new ChemDoodle.SketcherCanvas('sketcher', 500, 300, {useServices:false, oneMolecule:true}, ChemDoodle.featureDetection.supports_touch(), true);
+    sketcher.specs.atoms_displayTerminalCarbonLabels_2D = true;
+    sketcher.specs.atoms_useJMOLColors = true;
+    sketcher.specs.bonds_clearOverlaps_2D = true;
+    sketcher.specs.bonds_overlapClearWidth_2D = 2;
+    sketcher.repaint();
+    function getmol()
+    {
+    var mol = sketcher.getMolecule();
+    var mol2 = ChemDoodle.writeMOL(mol);
+    document.getElementById('id_moltext').value = mol2;
+    $("#molfromeditor").hide();
+    }
+    </script>
+    </div>
+    <p><input class="btn " name="molfromeditor" id="molfromeditor" value="Get SMILES from sketcher" onclick="javascript:getmol()"></p>
+ 
+    {{form.moltext}}
+   
+    </div>
+    </fieldset>
+    <fieldset>
+    <label>Or input SMILES:</label>
+    {{form.smiles}}
+    {{form.name}}
+    <span class="help-block">Please input valid SMILES of your molecule, name is optional.</span>
+    <button type="submit" class="btn btn-primary btn-large" name="submitdocking">Submit</button>
+  </fieldset>
+</form>
+
+</div>
+
+
+{% endblock %}

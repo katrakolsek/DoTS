@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Django based docking interface for target systems">
     <meta name="author" content="Katra Kolšek and Samo Turk">
-    {% if docking.status != "Finished!" %}
+    <meta charset="utf-8" http-equiv="X-UA-Compatible" chrome=1>
+    {% if docking.status == "Calculating..." %}
     <meta http-equiv="refresh" content="30">
     {% endif %}
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.css">

@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from DoTS.views import home, prediction, receptors, receptor, about, docking
+from DoTS.views import home, prediction, receptors, receptor, about, docking, converter
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^receptors', receptors),
     url(r'^receptor/(\d+)/$', receptor),
     url(r'^about', about),
+    url(r'^converter', converter),
     # url(r'^DoTS/', include('DoTS.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

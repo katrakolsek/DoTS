@@ -16,10 +16,10 @@
 <script type="text/javascript" src="/static/js/ChemDoodleWeb-libs.js"></script>
 <script type="text/javascript" src="/static/js/ChemDoodleWeb.js"></script>
 <script type="text/javascript" src="/static/js/jquery-ui-1.9.2.custom.min.js"></script>
-<script type="text/javascript" src="/static/js/ChemDoodleWeb-sketcher-changed.js"></script>
+<script type="text/javascript" src="/static/js/ChemDoodleWeb-sketcher.js"></script>
 
 
-<h2>Submit molecule</h2>
+    <h2>Submit molecule</h2>
     
 <div id="launch_cketcher">
     <fieldset>
@@ -47,24 +47,29 @@
     {
     var mol = sketcher.getMolecule();
     var mol2 = ChemDoodle.writeMOL(mol);
+    document.getElementById('id_moltext').value = mol2;
     $.get('converter.html', {name: mol2}, function(data){
-         $("input[name=smiles]").val(data);       
+        $.getJSON("converter.html", function (data) {
+                $("input[name=smiles]").val(data["size"]);
         });
     }
     </script>
     </div>
+    <div style= 'display:none' id="txt_name">
+    {{form.moltext}}
+    </div>
     <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close without changes</button>
-    <button class="btn btn-primary" onclick="javascript:getmol()" data-dismiss="modal" aria-hidden="true">Generete SMILES</button>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" onclick="javascript:getmol()" id="katra" data-dismiss="modal" aria-hidden="true">Save changes</button>
 </div>
 </div>
 </div>
 </div>
 </fieldset>
 </div>
-<br>
+
 <div class="form">
-<form action="" method="post">
+<form id='neki' action="" method="post">
 {% csrf_token %}
     <fieldset>
     <label>Or input SMILES:</label>

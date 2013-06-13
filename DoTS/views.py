@@ -19,11 +19,14 @@ def prediction(request):
     Form for submitting user calculations
     """
     allreceptors = Receptor.objects.all()
+    
+    
     if 'submitdocking' in request.POST:
         form = SubmitDocking(request.POST)
         form.is_valid()
         smiles = str(form.cleaned_data['smiles'])
         name = form.cleaned_data['name']
+        
         error = []
         try:
             pybel.readstring("smi", str(smiles))
@@ -87,3 +90,13 @@ def docking(request, idnum):
 def about(request):
     allreceptors = Receptor.objects.all()
     return render(request, 'about.html', {'allreceptors':allreceptors})
+
+def converter(request):
+    if request.method == 'GET':
+        mol = request.GET['name']
+        molecule = pybel.readstring("mol", str(mol))
+        smiles = molecule.write("smi").split('\t')[0]
+        return render(request, 'converter.html', {'smiles':smiles})
+    else:
+        mol = ''
+    return render(request, 'converter.html')
