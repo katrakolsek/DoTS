@@ -21,7 +21,7 @@
 
 <h2>Submit molecule</h2>
     
-<div id="launch_cketcher">
+<div id="launch_sketcher" >
     <fieldset>
     <label>Draw molecule:</label>
     <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch sketcher</a>
@@ -31,10 +31,10 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">ChemDoodle sketcher</h3>
     </div>
-    <div class="modal-body">
+    <div class="modal-body text-center">
     <div name="sketcher">
     <div>
-    <script type="text/javascript" style="text-align:left;margin:auto;" charset="utf-8">
+    <script type="text/javascript" style="text-align:center;margin:auto;" charset="utf-8">
     ChemDoodle.ELEMENT['H'].jmolColor = 'black';
     ChemDoodle.ELEMENT['S'].jmolColor = '#B9A130';
     var sketcher = new ChemDoodle.SketcherCanvas('sketcher', 500, 270, {useServices:false, oneMolecule:true}, ChemDoodle.featureDetection.supports_touch(), true);
