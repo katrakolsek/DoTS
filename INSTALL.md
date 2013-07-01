@@ -14,11 +14,19 @@ It was tested on current version of Arch Linux
 
 ## Installation
 
-`git clone https://github.com/samoturk/openmolDB.github`
+`git clone https://github.com/katrakolsek/DoTS.git`
 
 Then deploy it as you would any other Django project.
 
 Have a look at settings.py and set your database engine, time zone, etc.
+
+## Running development server
+
+Start the server:
+`python2 manage.py runserver`
+
+Start Celery worker:
+`python2 manage.py celery worker --loglevel=info`
 
 
 
