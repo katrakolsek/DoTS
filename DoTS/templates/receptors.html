@@ -14,8 +14,8 @@
 {% for receptor in allreceptors %}
 <section id="{{receptor.id}}">
 <h3><a href="/receptor/{{receptor.id}}">{{receptor.name}} ({{receptor.abbreviation}})</a></h3>
-<p>{{receptor.description}}</p>
-<p><em>Files: </em>{{receptor.pdbqt}}, {{receptor.conf}}, {{receptor.pdbqt_an}}, {{receptor.conf_an}}</p>
+<p>{{receptor.description|safe}}</p>
+<!--<p><em>Files: </em>{{receptor.pdbqt}}, {{receptor.conf}}, {{receptor.pdbqt_an}}, {{receptor.conf_an}}</p>-->
 </section>
 <hr>
 {% endfor%}  

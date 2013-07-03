@@ -63,11 +63,12 @@
 </fieldset>
 </div>
 <br>
+<p><strong>Or:</strong></p>
 <div class="form">
 <form action="" method="post">
 {% csrf_token %}
     <fieldset>
-    <label>Or input SMILES:</label>
+    <label>Input SMILES:</label>
     {{form.smiles}}
     {{form.name}}
     <span class="help-block">Please input valid SMILES of your molecule, name is optional.</span>
