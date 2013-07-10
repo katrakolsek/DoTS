@@ -9,6 +9,8 @@ def adddocking(uniquestring,smiles,molname):
     molname = molname.decode("windows-1252").encode('utf-8','ignore')
     try:
         mol = pybel.readstring("smi",str(smiles))
+        mol.OBMol.AddHydrogens(True, True, 7.4)
+        smiles = mol.write(format='smi')
         descs = mol.calcdesc()
         #generate 2D coordinates, needs openbabel
         obConversion = openbabel.OBConversion()

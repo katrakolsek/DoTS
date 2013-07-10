@@ -40,6 +40,7 @@ def dockingseq(dock):
     makedirs(respath)
     smiles = dock.smiles
     mol = pybel.readstring('smi', smiles)
+    mol.OBMol.AddHydrogens(False, True, 7.4)
     mol.make3D(forcefield="MMFF94", steps=10)
     mol.localopt(forcefield="MMFF94", steps=500)
     mol.write("pdbqt", respath+"/orig.pdbqt", overwrite=True)
