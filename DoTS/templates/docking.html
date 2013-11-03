@@ -9,7 +9,7 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.show-grid [class*="span"] {
+.show-grid [class*="col-md-"] {
   background-color: #eee;
   text-align: center;
   -webkit-border-radius: 3px;
@@ -18,27 +18,35 @@
   min-height: 40px;
   line-height: 40px;
 }
-.show-grid [class*="span"]:hover {
+.show-grid [class*="col-md-"]:hover {
   background-color: #ddd;
 }
 .show-grid .show-grid {
   margin-top: 0;
   margin-bottom: 0;
 }
-.show-grid .show-grid [class*="span"] {
+.show-grid .show-grid [class*="col-md-"] {
   margin-top: 5px;
 }
-.show-grid [class*="span"] [class*="span"] {
+.show-grid [class*="col-md-"] [class*="col-md-"] {
   background-color: #ccc;
 }
-.show-grid [class*="span"] [class*="span"] [class*="span"] {
+.show-grid [class*="col-md-"] [class*="col-md-"] [class*="col-md-"] {
   background-color: #999;
 }
 </style>
 <div>
-<h3>Docking prediction "{{docking.uniquestring}}"</h3>
+<h2>Docking prediction "{{docking.uniquestring}}"</h2>
 </div>
-
+{% if docking.status != "Finished!" %}
+<div class="row">
+<div class="alert alert-dismissable alert-info col-md-6">
+Calculating the prediction. Please wait. In average it takes 5 minutes. This page refreshes automatically every 30 seconds.
+</div>
+</div>
+{% endif %}
+<!--{{docking.results}}-->
+<div class="row">
 <div class="prop">
 <script>
     var viewACS = new ChemDoodle.ViewerCanvas('viewACS', 455, 180);
@@ -57,29 +65,30 @@
 <p><strong>SMILES: </strong>{{docking.smiles}}</p>
 <p><strong>Name: </strong>{{docking.molname}}</p>
 </div>
+</div>
 <div>
 <h2>Properties</h2>
 <div class="bs-docs-grid">
 <div class="row show-grid">
-    <div class="span1" style="background:#bdc3c7"><abbr title="Molecular weight">MW</abbr></div>
-    <div class="span1" style="background:#bdc3c7"><abbr title="Hydrogen bond acceptors">HBA</abbr></div>
-    <div class="span1" style="background:#bdc3c7"><abbr title="Hydrogen bond donors">HBD</abbr></div>
-    <div class="span1" style="background:#bdc3c7"><abbr title="Logarithm of partition coefficient">LogP</abbr></div>
-    <div class="span1" style="background:#bdc3c7"><abbr title="Topological polar surface area">TPSA</abbr></div>
-    <div class="span1" style="background:#bdc3c7"><abbr title="Rotatable bonds">Rot.</abbr></div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#bdc3c7"><abbr title="Molecular weight">MW</abbr></div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#bdc3c7"><abbr title="Hydrogen bond acceptors">HBA</abbr></div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#bdc3c7"><abbr title="Hydrogen bond donors">HBD</abbr></div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#bdc3c7"><abbr title="Logarithm of partition coefficient">LogP</abbr></div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#bdc3c7"><abbr title="Topological polar surface area">TPSA</abbr></div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#bdc3c7"><abbr title="Rotatable bonds">Rot.</abbr></div>
 </div>
 
 <div class="row show-grid">
-    <div class="span1" style="background:#ecf0f1">{{docking.CMW|floatformat:2}}</div>
-    <div class="span1" style="background:#ecf0f1">{{docking.HBA}}</div>
-    <div class="span1" style="background:#ecf0f1">{{docking.HBD}}</div>
-    <div class="span1" style="background:#ecf0f1">{{docking.logP|floatformat:2}}</div>
-    <div class="span1" style="background:#ecf0f1">{{docking.tpsa}}</div>
-    <div class="span1" style="background:#ecf0f1">{{docking.nrb}}</div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#ecf0f1">{{docking.CMW|floatformat:2}}</div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#ecf0f1">{{docking.HBA}}</div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#ecf0f1">{{docking.HBD}}</div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#ecf0f1">{{docking.logP|floatformat:2}}</div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#ecf0f1">{{docking.tpsa}}</div>
+    <div class="col-md-1 col-xs-2 margin-grid-docking" style="background:#ecf0f1">{{docking.nrb}}</div>
 </div>
 
 <div class="row show-grid">
-    <div class="span6" style="background:#bdc3c7"><abbr title="Pan Assay Interferance Compounds">PAINS: {{docking.pains}}</abbr></div>
+    <div class="col-md-6" style="background:#bdc3c7"><abbr title="Pan Assay Interferance Compounds">PAINS: {{docking.pains}}</abbr></div>
 </div>
 
 </div>
@@ -89,7 +98,7 @@
 <div class="prediction">
 <h2>Predictions</h2>
 {% if docking.status != "Finished!" %}
-{{docking.status}}
+<h4>{{docking.status}}</h4>
 {% endif %}
 <!--{{docking.results}}-->
 </div>
@@ -99,10 +108,10 @@
 <p>Probability of binding: </p>
 <div class="bs-docs-grid">
             <div class="row show-grid">
-              <div class="span2" style="background:#e74c3c">High probability</div>
-              <div class="span1" style="background:#e67e22"></div>
-              <div class="span1" style="background:#f1c40f"></div>
-              <div class="span2" style="background:#2ecc71">Low probability</div>
+              <div class="col-md-2 col-sm-4 margin-grid-docking" style=" background:#e74c3c">High probability</div>
+              <div class="col-md-1 col-sm-2 margin-grid-docking" style=" background:#e67e22">...</div>
+              <div class="col-md-1 col-sm-2 margin-grid-docking" style=" background:#f1c40f">...</div>
+              <div class="col-md-2 col-sm-4 margin-grid-docking" style=" background:#2ecc71">Low probability</div>
             </div>
 </div>
 </div>

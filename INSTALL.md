@@ -28,5 +28,10 @@ Start the server:
 Start Celery worker:
 `python2 manage.py celery worker --loglevel=info`
 
+## Do not forget when deploying
 
+* Set debug to false
+* Replace SECRET_KEY
+* Change ALLOWED_HOSTS to your host
+* Change admin (katra) password (default=test)
 

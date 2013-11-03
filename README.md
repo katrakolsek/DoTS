@@ -8,7 +8,8 @@ Docking interface for Target Systems
 ## About
 
 DoTS is open source Docking interface for Target Systems, used for docking 1 molecule to multiple targets
-It supports SMILES and structure draw docking with AutoDock Vina.
+It supports SMILES and structure draw docking with AutoDock Vina.  
+It runs [Endocrine Disruptome](http://endocrinedisruptome.ki.si/)  
 
 This project wouldn't be possible without these excellent open source projects:
 * Django - Python web framework, which is a base for DoTS

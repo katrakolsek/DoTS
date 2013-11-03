@@ -497,4 +497,5 @@ def detect_pains(mol):
         if smarts.findall(mol):
             painsfound += pain.split(' ')[1] + " "
             #print pain.split(' ')[1]
+        
     return painsfound

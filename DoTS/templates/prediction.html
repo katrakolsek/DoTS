@@ -10,7 +10,7 @@
 {% endfor %}
 {% endif %}
 
-<link rel="stylesheet" type="text/css" href="/static/js/ChemDoodleWeb.css" />
+<link rel="stylesheet" type="text/css" href="/static/js/ChemDoodleWeb.css">
 <link rel="stylesheet" href="/static/js/jquery-ui-1.9.2.custom.css" type="text/css">
 
 <script type="text/javascript" src="/static/js/ChemDoodleWeb-libs.js"></script>
@@ -19,19 +19,17 @@
 <script type="text/javascript" src="/static/js/ChemDoodleWeb-sketcher-changed.js"></script>
 
 
-<h2>Submit molecule</h2>
+
+<h2 class="page-header">Submit molecule</h2>
     
 <div id="launch_sketcher" >
     <fieldset>
     <label>Draw molecule:</label>
-    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch sketcher</a>
+
+
+
     
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">ChemDoodle sketcher</h3>
-    </div>
-    <div class="modal-body text-center">
+    <div>
     <div name="sketcher">
     <div>
     <script type="text/javascript" style="text-align:center;margin:auto;" charset="utf-8">
@@ -53,17 +51,18 @@
     }
     </script>
     </div>
-    <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close without changes</button>
-    <button class="btn btn-primary" onclick="javascript:getmol()" data-dismiss="modal" aria-hidden="true">Generete SMILES</button>
-</div>
-</div>
-</div>
-</div>
+    </div>
+    </div>
+    <button class="btn btn-info btn-sm" onclick="javascript:getmol()" data-dismiss="modal" aria-hidden="true">Generete SMILES</button>
+
 </fieldset>
 </div>
+
 <br>
+
 <p><strong>Or:</strong></p>
+
+<br>
 <div class="form">
 <form action="" method="post">
 {% csrf_token %}
@@ -72,7 +71,7 @@
     {{form.smiles}}
     {{form.name}}
     <span class="help-block">Please input valid SMILES of your molecule, name is optional.</span>
-    <button type="submit" class="btn btn-primary btn-large" id='selected-button' name="submitdocking">Submit</button>
+    <button type="submit" class="btn btn-primary btn-lg" id='selected-button' name="submitdocking">Submit</button>
   </fieldset>
 </form>
 

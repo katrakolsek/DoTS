@@ -145,7 +145,7 @@ def resultstable(receptors,results):
                     color = "#f1c40f" #yellow
                 else:
                     color = "#2ecc71" #green
-                scores += '<div class="span2" style="background:' + color + '"><strong>' + rec.abbreviation + ": " + result.split(":")[1] + '</strong></div>'
+                scores += '<div class="col-md-2 col-sm-4" style="border-style:solid;border-width:1px;border-color:white; background:' + color + '"><strong>' + rec.abbreviation + ": " + result.split(":")[1] + '</strong></div>'
         c += 1
         if rec.pdbqt_an and rec.conf_an:
             if c%3 == 0:
@@ -164,7 +164,7 @@ def resultstable(receptors,results):
                         color = "#f1c40f" #yellow
                     else:
                         color = "#2ecc71" #green
-                    scores += '<div class="span2" style="background:' + color + '"><strong>' + rec.abbreviation+" an.:  "+result.split(":")[1] + '</strong></div>'
+                    scores += '<div class="col-md-2 col-sm-4" style="border-style:solid; border-color:white;border-width:1px; background:' + color + '"><strong>' + rec.abbreviation+" an.:  "+result.split(":")[1] + '</strong></div>'
             c += 1
     scores += '</div></div>'
     return scores

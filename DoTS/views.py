@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponseRedirect
-from news.models import News
+from news.models import News, Faq
 from docking.models import Receptor, Docking
 from docking.adddocking import adddocking
 from docking.forms import SubmitDocking
@@ -13,6 +13,11 @@ def home(request):
     allnews = News.objects.all()
     allreceptors = Receptor.objects.all()
     return render(request, 'index.html', {'allnews':allnews, 'allreceptors':allreceptors})
+
+def get_faq(request):
+    allfaq = Faq.objects.all()
+    allreceptors = Receptor.objects.all()
+    return render(request, 'faq.html', {'allfaq':allfaq, 'allreceptors':allreceptors})
 
 def prediction(request):
     """
@@ -35,7 +40,7 @@ def prediction(request):
         if not error:
             uniquestring = ''.join(random.choice(string.ascii_lowercase) for x in range(10))
             dockid = adddocking(uniquestring,smiles,name)
-            return HttpResponseRedirect('/docking/%s/' % dockid)
+            return HttpResponseRedirect('/docking/%s/' % uniquestring)
         else:
             form = SubmitDocking()
             return render(request, 'prediction.html', {'form':form, 'error':error, 'allreceptors':allreceptors})
@@ -74,14 +79,14 @@ def receptor(request, idnum):
         tresholds_an = None
     return render(request, 'receptor.html', {'receptor':rec, 'rocdata':rocdata, 'enric':enric, 'auc':auc, 'rocdata_an':rocdata_an, 'enric_an':enric_an, 'auc_an':auc_an, 'allreceptors':allreceptors, 'tresholds':tresholds, 'tresholds_an':tresholds_an})
 
-def docking(request, idnum):
+def docking(request, dockid):
     allreceptors = Receptor.objects.all()
     #Views for individual docking predictions
-    try:
-        offset = int(idnum)
-    except ValueError:
-        raise Http404()
-    dock = get_object_or_404(Docking, pk=idnum)
+#    try:
+#        offset = int(idnum)
+#    except ValueError:
+#        raise Http404()
+    dock = get_object_or_404(Docking, uniquestring=dockid)
     results = dock.results.split(",")
     receptors = Receptor.objects.all()
     scores = resultstable(receptors,results)

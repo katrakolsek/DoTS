@@ -31,7 +31,10 @@ def adddocking(uniquestring,smiles,molname):
         rb = smarts.findall(mol)
         nrb = len(rb)
         #Get fingerprint and molecular complexity
-        pains = detect_pains(mol)
+        if detect_pains(mol) == "":
+            pains = "Not found"
+        else :
+            pains = detect_pains(mol)
         status = "Calculating..."
         results = ""
         dock = Docking(uniquestring=uniquestring,smiles=smiles,molname=molname,molfile=molfile,

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+<h2 class="page-header">Frequently Asked Questions</h2>
+</div>
+
+{% for item in allfaq %}
+<div>
+<h3>{{item.title}}</h3>
+<p>{{item.body|safe}}</p>
+<hr>
+</div>
+
+{% endfor%}
+{% endblock %}
+
+

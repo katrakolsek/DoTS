@@ -2,8 +2,8 @@
 {% block content %}
 
 <div>
-<h2>{{receptor.name}}</h2>
-<h5>Abbreviation: {{receptor.abbreviation}}</h5>
+<h2 class="page-header">{{receptor.name}}</h2>
+<p>Abbreviation: {{receptor.abbreviation}}</p>
 </div>
 
 <div class="description">
@@ -50,12 +50,12 @@ $(function () {
 </script>
 <h5>Tresholds</h5>
 <div class="row">
-<div class="span8">
+<div class="col-md-8">
 {{tresholds|safe}}
 <blockquote>
 <p><small>More negative score means greater possibility for binding.</small></p>
 <p><small>Selectivity represents fraction of true positives identified above certain score.</small></p>
-<p><small>Specificity represents fraction of true negatives eliminated above certain score.</small></p>
+<p><small>1 - Specificity represents fraction of true negatives eliminated above certain score.</small></p>
 </blockquote>
 </div>
 </div>
@@ -94,12 +94,12 @@ $(function () {
 <h5>Tresholds</h5>
 <p>More negative score means greater possibility for binding.</p>
 <div class="row">
-<div class="span8">
+<div class="col-md-8">
 {{tresholds_an|safe}}
 <blockquote>
 <p><small>More negative score means greater possibility for binding.</small></p>
 <p><small>Selectivity represents fraction of true positives identified above certain score.</small></p>
-<p><small>Specificity represents fraction of true negatives eliminated above certain score.</small></p>
+<p><small>1 - Specificity represents fraction of true negatives eliminated above certain score.</small></p>
 </blockquote>
 </div>
 </div>

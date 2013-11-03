@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>DoTS</title>
+    <title>Endocrine Disruptome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Django based docking interface for target systems">
     <meta name="author" content="Katra Kolšek and Samo Turk">
@@ -11,15 +11,19 @@
     <meta http-equiv="refresh" content="30">
     {% endif %}
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/static/bootswatch-spruce.css" />
-    <link rel="stylesheet" type="text/css" href="/static/fontawesome.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap_united.css" >
+    <link rel="shortcut icon" href="/static/favicon.png">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
     <style>
     .body-div {
-    margin-top: 70px;
+    margin-top: 40px;
     }
     .welcome-header {
     margin-top: 130px;
     }
+    .modal-personal {
+     position: fixed;
+     }
     .navbar-fixed-right {
      position: fixed;
      right: 0;
@@ -32,7 +36,11 @@
     padding-top: 60px;
     margin-top:0;
     }
-    
+    .margin-grid-docking{
+    border-style:solid; 
+    border-color:white;
+    border-width:1px;
+    }
     .highlighted {
     -webkit-box-shadow: 0 0 8px #FFD700;
     -moz-box-shadow: 0 0 8px #FFD700;
@@ -44,8 +52,8 @@
     
     <!-- Le javascript first on google servers-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="/static/js/jquery.smooth-scroll.js"></script>
     <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/jquery.smooth-scroll.js"></script>
     <script src="/static/js/jquery.flot.js"></script>
     <script type="text/javascript" language="javascript" src="/static/js/jquery.flot.symbol.js"></script>
     <script type="text/javascript" language="javascript" src="/static/js/jquery.flot.axislabels.js"></script>
@@ -56,19 +64,28 @@
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-    <link rel="shortcut icon" href="/static/favicon.png">
+    <!--link rel="shortcut icon" href="/static/favicon.png"-->
   </head>
   
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
-  <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-  <div class="container">
-  <!--<a class="brand" href="./"> Home</a>-->
-    <ul class="nav">
-      <li><a href="/"><i class="icon-home"></i> Home</a></li>
-      <li><a href="/prediction.html"><i class="icon-medkit"></i> Prediction</a></li>
+  
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+    <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+    <ul class="nav navbar-nav">
+      <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="/prediction.html"><i class="fa fa-medkit"></i> Prediction</a></li>
       <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="/receptors.html"><i class="icon-screenshot"></i> Targets</a>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="/receptors.html"><i class="fa fa-bullseye"></i> Targets</a>
       <ul class="dropdown-menu" id="swatch-menu">
         <li><a href="/receptors.html">overview</a></li>
         <li class="divider"></li>
@@ -76,21 +93,20 @@
         <li><a href="/receptor/{{receptor.id}}"><abbr title="{{receptor.name}}">{{receptor.abbreviation}}</abbr></a></li>
       {% endfor%}
       </ul>
-      </li>
-      <li><a href="/about.html"><i class="icon-question-sign"></i> About</a></li>
+      <li><a href="/FAQ.html"><i class="fa fa-question-circle"></i> FAQ</a></li>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/about.html"><i class="fa fa-info-circle"></i> About</a></li>
+    </ul>
+    </nav>
   </div>
-  </div>
-  
-  </div>
-  
+  </header>
   
   <div class="container body-div">
-  
   {% block content %}
   {% endblock %}
   </div>
-  </div>
+  
   </body>
 </html>
 
