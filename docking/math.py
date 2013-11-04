@@ -33,14 +33,14 @@ def getroc(data):
     nhist, nedge = histogram(nscores, bins=edge)
     #print phist
     #print nhist
-    selectivity = []
+    sensitivity = []
     oneminusspecificity = []
     csum = 0
     for i in phist:
         csum += i
-        selectivity.append(float(csum)/float(totact))
+        sensitivity.append(float(csum)/float(totact))
     #    print i
-    #print selectivity
+    #print sensitivity
     
     csum = 0
     for i in nhist:
@@ -48,7 +48,7 @@ def getroc(data):
         oneminusspecificity.append(1 - (float(totinact) - float(csum))/float(totinact))
     
     #print oneminusspecificity
-    return (oneminusspecificity, selectivity)
+    return (oneminusspecificity, sensitivity)
 
 def getEnrichment(data, procent):
     my_list = []
@@ -83,7 +83,7 @@ def tresholdstable(treshold):
         <thead>
         <tr>
         <th>Score</th>
-        <th>Selectivity</th>
+        <th>Sensitivity</th>
         <th>Specificity</th>
         <th><abbr title="Positive predictive value">PPV</abbr></th>
         <th><abbr title="Negative predictive value">NPV</abbr></th>
