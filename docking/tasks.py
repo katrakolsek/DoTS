@@ -1,9 +1,12 @@
-from celery.decorators import task
+from __future__ import absolute_import
+from celery import shared_task
+
 import pybel
 from subprocess import call
 from os import listdir, makedirs
 from django.conf import settings
 from docking.models import Receptor
+
 
 def datacleaning(datafile):
     """
@@ -30,7 +33,7 @@ def datacleaning(datafile):
     print lines [0][0]
     return lines [0][0]
 
-@task(max_retries=2, default_retry_delay=5*60)
+@shared_task(max_retries=2, default_retry_delay=5*60)
 def dockingseq(dock):
     """
     This module needs celery and compatible messaging queue system (RabbitMQ)

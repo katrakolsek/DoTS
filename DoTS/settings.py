@@ -3,8 +3,8 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-import djcelery
-djcelery.setup_loader()
+#import djcelery
+#djcelery.setup_loader()
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'news',
     'docking',
-    'djcelery',
+#    'djcelery',
 )
-CELERY_IMPORTS = ("docking.tasks", )
+#CELERY_IMPORTS = ("docking.tasks", )
 
