@@ -36,7 +36,7 @@ def prediction(request):
         try:
             pybel.readstring("smi", str(smiles))
         except:
-            error.append("Error in SMILES")
+            error.append("Error in SMILES or compound molecular weight too big")
         if not error:
             uniquestring = ''.join(random.choice(string.ascii_lowercase) for x in range(10))
             dockid = adddocking(uniquestring,smiles,name)
