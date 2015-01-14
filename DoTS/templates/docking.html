@@ -38,10 +38,10 @@
 <div>
 <h2>Docking prediction "{{docking.uniquestring}}"</h2>
 </div>
-{% if docking.status != "Finished!" %}
+{% if docking.status == "Calculating..." %}
 <div class="row">
 <div class="alert alert-dismissable alert-info col-md-6">
-Calculating the prediction. Please wait. In average it takes 5 minutes. This page refreshes automatically every 30 seconds.
+Calculating the prediction. Please wait. In average it takes 5 minutes. This page refreshes automatically every 30 seconds. Save the link so you can retrieve results later.
 </div>
 </div>
 {% endif %}
@@ -96,7 +96,7 @@ Calculating the prediction. Please wait. In average it takes 5 minutes. This pag
 
 
 <div class="prediction">
-<h2>Predictions</h2>
+<h2>Predictions*</h2>
 {% if docking.status != "Finished!" %}
 <h4>{{docking.status}}</h4>
 {% endif %}
@@ -112,6 +112,11 @@ Calculating the prediction. Please wait. In average it takes 5 minutes. This pag
               <div class="col-md-1 col-sm-2 margin-grid-docking" style=" background:#f1c40f">...</div>
               <div class="col-md-2 col-sm-4 margin-grid-docking" style=" background:#2ecc71">Low probability</div>
             </div>
+</div>
+<div class="col-md-6">
+<blockquote>
+<small>*Clicking on any result score downloads compound docked in that particular active site. Receptors can be downloaded from "Targets" site.</small>
+</blockquote>
 </div>
 </div>
 

@@ -17,7 +17,7 @@
 {% for item in allnews %}
 <div>
 <h4>{{item.title}}</h4>
-{{item.body}}
+{{item.body|safe}}
 <p><strong>{{item.author}}
 {{item.additiondate}}
 </strong></p>

@@ -89,7 +89,7 @@ def docking(request, dockid):
     dock = get_object_or_404(Docking, uniquestring=dockid)
     results = dock.results.split(",")
     receptors = Receptor.objects.all()
-    scores = resultstable(receptors,results)
+    scores = resultstable(receptors,results,dockid)
     return render(request, 'docking.html', {'docking':dock, 'scores':scores, 'allreceptors':allreceptors})
 
 def about(request):

@@ -17,6 +17,9 @@ def adddocking(uniquestring,smiles,molname):
     
     if mol.molwt > 800:
         # Prevent people from docking too big compounds
+        status = "Molecular weight too big, calculation aborted.."
+        dock = Docking(uniquestring=uniquestring,smiles=smiles,molname=molname,status=status)
+        dock.save()
         return "Error"
     
     mol.OBMol.AddHydrogens(True, True, 7.4)
