@@ -1,7 +1,7 @@
 DoTS
 ============
 
-Docking interface for Target Systems
+Docking interface for Target Systems. In action on [Endocrine Disruptome](http://endocrinedisruptome.ki.si/)!
 
 ![Editor Screenshot](https://raw.github.com/katrakolsek/DoTS/master/DoTS_result.png)
 
