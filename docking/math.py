@@ -164,7 +164,7 @@ def resultstable(receptors,results,dockid):
                         color = "#f1c40f" #yellow
                     else:
                         color = "#2ecc71" #green
-                    scores += '<div class="col-md-2 col-sm-4" style="border-style:solid;border-width:1px;border-color:white; background:' + color + '"><strong><a href="/static/results/' + dockid + '/' + result.split(":")[0] + '_dock.pdbqt" style="color:black">' + rec.abbreviation + ": " + result.split(":")[1] + '</a></strong></div>'
+                    scores += '<div class="col-md-2 col-sm-4" style="border-style:solid;border-width:1px;border-color:white; background:' + color + '"><strong><a href="/static/results/' + dockid + '/' + result.split(":")[0] + '_dock.pdbqt" style="color:black">' + rec.abbreviation + " an.: " + result.split(":")[1] + '</a></strong></div>'
             c += 1
     scores += '</div></div>'
     return scores
