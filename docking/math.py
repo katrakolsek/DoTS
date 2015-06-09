@@ -153,9 +153,9 @@ def resultstable(receptors,results,dockid):
                 </div>
                 <div class="row show-grid">
                 '''
-            treshold1 = float(rec.treshold2.split(';')[0].split(' ')[0])
-            treshold2 = float(rec.treshold2.split(';')[1].split(' ')[0])
-            treshold3 = float(rec.treshold2.split(';')[2].split(' ')[0])
+            treshold1 = float(rec.treshold1_an.split(';')[0].split(' ')[0])
+            treshold2 = float(rec.treshold1_an.split(';')[1].split(' ')[0])
+            treshold3 = float(rec.treshold1_an.split(';')[2].split(' ')[0])
             for result in results:
                 if rec.pdbqt_an in result:
                     score = float(result.split(":")[1])
